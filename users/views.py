@@ -60,10 +60,10 @@ class UserCreateView(CreateView):
             password=user_data["password"]
         )
 
-        # for loc in user_data["location"]:
-        #     user_location = Location.objects.get_or_create(name=loc)
-        #
-        # ads_user.location_id.add(user_location)
+        for loc in user_data["location"]:
+            location = Location.objects.get_or_create(name=loc)
+
+        ads_user.location_id.add(location)
         ads_user.save()
 
         return JsonResponse({
@@ -86,10 +86,10 @@ class UserUpdateView(UpdateView):
         self.object.last_name = user_data["last_name"]
         self.object.password = user_data["password"]
 
-        # for loc in user_data["location_id"]:
-        #     location = Location.objects.get_or_create(name=loc)
-        #
-        # self.object.location_id.add(location)
+        for loc in user_data["location_id"]:
+            location = Location.objects.get_or_create(name=loc)
+
+        self.object.location_id.add(location)
 
         self.object.save()
 
@@ -98,7 +98,6 @@ class UserUpdateView(UpdateView):
             "username": self.object.username,
             "first_name": self.object.first_name,
             "last_name": self.object.last_name,
-            #"location_id": self.object.location_id,
         }, safe=False, json_dumps_params={"ensure_ascii": False})
 
 @method_decorator(csrf_exempt, name="dispatch")

@@ -27,6 +27,18 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "djangorestframework"
+version = "3.14.0"
+description = "Web APIs for Django, made easy."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+django = ">=3.0"
+pytz = "*"
+
+[[package]]
 name = "pillow"
 version = "9.3.0"
 description = "Python Imaging Library (Fork)"
@@ -47,6 +59,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "pytz"
+version = "2022.6"
+description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "sqlparse"
 version = "0.4.3"
 description = "A non-validating SQL parser."
@@ -65,12 +85,14 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4719dcbf571f9cb9e10625f023067d4735ebd1dbef8fcf48813b1759e374c6db"
+content-hash = "de06e5e62427d1f678d5cd2114c7f7a53b3bad016f24d0901c51ff19cbc5e90a"
 
 [metadata.files]
 asgiref = []
 django = []
+djangorestframework = []
 pillow = []
 psycopg2 = []
+pytz = []
 sqlparse = []
 tzdata = []

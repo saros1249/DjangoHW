@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=50)
-    lat = models.DecimalField(max_digits=8, decimal_places=6)
-    lng = models.DecimalField(max_digits=8, decimal_places=6)
+    name = models.CharField(null=True, max_length=50)
+    lat = models.DecimalField(null=True, max_digits=8, decimal_places=6)
+    lng = models.DecimalField(null=True, max_digits=8, decimal_places=6)
 
     class Meta:
         verbose_name = "Адрес"
@@ -24,12 +24,12 @@ class UserRole:
 
 
 class User(models.Model):
-    first_name = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=20, null=True)
     last_name = models.CharField(max_length=20, null=True)
     username = models.CharField(max_length=30, unique=True)
     password = models.CharField(max_length=50)
     role = models.CharField(choices=UserRole.choices, default='member', max_length=20)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
 
     class Meta:

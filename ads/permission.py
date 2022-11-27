@@ -6,8 +6,6 @@ class AdsPermission(BasePermission):
     message = "Редактирование объявления доступно владельцу, модератору или администратору."
 
     def has_object_permission(self, request, view, obj):
-        print(request.user.role)
-
         if request.user.role == UserRole.ADMIN or request.user.role == UserRole.MODERATOR \
                 or request.user == obj.author:
             return True

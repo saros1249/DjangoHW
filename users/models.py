@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -23,11 +24,7 @@ class UserRole:
                ('Модератор', MODERATOR))
 
 
-class User(models.Model):
-    first_name = models.CharField(max_length=20, null=True)
-    last_name = models.CharField(max_length=20, null=True)
-    username = models.CharField(max_length=30, unique=True)
-    password = models.CharField(max_length=50)
+class User(AbstractUser):
     role = models.CharField(choices=UserRole.choices, default='member', max_length=20)
     age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)

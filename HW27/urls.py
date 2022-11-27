@@ -30,6 +30,7 @@ urlpatterns = [
     path("", views.index),
     path("ad/", include('ads.urls.ad_urls')),
     path("user/", include("users.urls")),
+    path("selection/", include("ads.urls.sel_urls")),
 ]
 
 urlpatterns += router.urls

@@ -29,3 +29,16 @@ class Ads(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Selection(models.Model):
+    name = models.CharField(max_length=50, null=False)
+    owner = models.IntegerField(null=True)
+    items = models.ManyToManyField(Ads)
+
+    class Meta:
+        verbose_name = "Подборка объявлений"
+        verbose_name_plural = "Подборки объявлений"
+
+    def __str__(self):
+        return self.name

@@ -1,11 +1,11 @@
-Id,first_name,last_name,username,password,role,age,location_id
-1,Павел,Никифоров,pnikifirov,gZvptL,member,21,1
-2,Альбина,Игнатьева,abiba_1341,4fVqL2,moderator,24,3
-3,Иван,Сысоев,vanya777,o535pj,admin,29,8
-4,Марина,Беркутова,orlanfree,d49rSO,moderator,19,10
-5,Галина,Иванова,galina_ivanova,wCqlVE,member,41,2
-6,Петр,Бойченко,petr_bo,xuR2jf,member,37,4
-7,Никита,,nikitapro,gzP4vR,member,26,7
-8,Виолетта,Петушок,riverna,zo0rj6,member,24,5
-9,Гульнара,Ибрагимова,gulnara321,daMocL,moderator,22,9
-10,Борис,Зайка,dragon84,sasha123456,member,35,6
+Id,password,last_login,is_superuser,username,first_name,last_name,email,is_stuff,is_active,date_joined,role,age,location_id
+2,gZvptL,,false,pnikifirov,Павел,Никифоров,pa@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,21,1
+3,4fVqL2,,false,abiba_1341,Альбина,Игнатьева,albinai@asd.ru,true,true,2022-11-26 06:00:43.202474 +00:00,moderator,24,3
+4,o535pj,,false,vanya777,Иван,Сысоев,sysivan@asd.ru,true,true,2022-11-26 06:00:43.202474 +00:00,admin,29,8
+5,d49rSO,,false,orlanfree,Марина,Беркутова,bercutm@asd.ru,true,true,2022-11-26 06:00:43.202474 +00:00,moderator,19,10
+6,wCqlVE,,false,galina_ivanova,Галина,Иванова,galinai@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,41,2
+7,xuR2jf,,false,petr_bo,Петр,Бойченко,pboy@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,37,4
+8,gzP4vR,,false,nikitapro,Никита,Иванов,nik@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,26,7
+9,zo0rj6,,false,riverna,Виолетта,Петушок,petaviol@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,24,5
+10,daMocL,,false,gulnara321,Гульнара,Ибрагимова,guli@asd.ru,true,true,2022-11-26 06:00:43.202474 +00:00,moderator,22,9
+11,sasha123456,,false,dragon84,Борис,Зайка,rubbit@asd.ru,false,true,2022-11-26 06:00:43.202474 +00:00,member,35,6

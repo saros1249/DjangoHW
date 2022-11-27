@@ -1,4 +1,4 @@
-from ads.models import Categories, Ads
+from ads.models import Categories, Ads, Selection
 from rest_framework import serializers
 from users.models import User
 
@@ -9,7 +9,7 @@ class CatSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AdsListSerialiser(serializers.ModelSerializer):
+class AdsListSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         required=False,
         queryset=User.objects.all(),
@@ -91,7 +91,7 @@ class AdsUpdateSerializer(serializers.ModelSerializer):
         self._author = self.initial_data.pop("author")
         return super().is_valid(raise_exception=raise_exception)
 
-    def save(self, validated_data):
+    def save(self, **kwargs):
         ads = super().save()
         author, _ = User.objects.get_or_create(username=self._author)
         ads.author = author
@@ -102,4 +102,51 @@ class AdsUpdateSerializer(serializers.ModelSerializer):
 class AdsDestroySerializer(serializers.ModelSerializer):
     class Meta:
         model = Ads
+        fields = "id"
+
+
+class SelectionListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selection
+        fields = ["id", "name"]
+
+
+class SelectionRetrieveSerializer(serializers.ModelSerializer):
+    items = AdsListSerializer(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+        model = Selection
+        fields = "__all__"
+
+
+class SelectionCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selection
+        fields = "__all__"
+
+
+class SelectionUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selection
+        fields = ["name", "items"]
+
+    def is_valid(self, raise_exception=False):
+        self._items = self.initial_data.pop("items", [])
+        return super().is_valid(raise_exception=raise_exception)
+
+    def save(self, **kwargs):
+        selection = super().save()
+
+        for item in self._items:
+            selection.items.add(item)
+        selection.save()
+        return selection
+
+
+class SelectionDestroySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Selection
         fields = "id"

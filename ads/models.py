@@ -1,6 +1,10 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator, MinLengthValidator
 from users.models import User, Location
+
+def min_slug_lenght(value: str):
+    if len(value) < 5:
+        raise ValidationError(f"{value} не верна.")
 
 
 class Categories(models.Model):
@@ -15,9 +19,10 @@ class Categories(models.Model):
 
 
 class Ads(models.Model):
-    name = models.CharField(max_length=100)
+    slug = models.CharField(unique=True, max_length=10, validators=[min_slug_lenght])
+    name = models.CharField(max_length=100, validators=[MinLengthValidator(10)])
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='ad')
-    price = models.PositiveIntegerField()
+    price = models.PositiveIntegerField(validators=[MinValueValidator(0)])
     description = models.CharField(max_length=2000, null=True)
     is_published = models.BooleanField(default=False)
     image = models.ImageField(upload_to='image/', null=True, blank=True)

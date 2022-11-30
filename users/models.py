@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -28,6 +30,8 @@ class User(AbstractUser):
     role = models.CharField(choices=UserRole.choices, default='member', max_length=20)
     age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    birth_date = models.DateField(default=date.today())
+    email = models.EmailField(unique=True)
 
     class Meta:
         verbose_name = "Пользователь"

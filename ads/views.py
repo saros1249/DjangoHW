@@ -1,4 +1,4 @@
-from ads.permission import SelectionAuthorPermission, AdsPermission
+from ads.permissions import SelectionAuthorPermission, AdsPermission
 from ads.serializers import *
 from django.db.models import Q
 from django.http import JsonResponse

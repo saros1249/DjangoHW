@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MinLengthValidator
 from users.models import User, Location
-
+from django.core.exceptions import ValidationError
 def min_slug_lenght(value: str):
     if len(value) < 5:
         raise ValidationError(f"{value} не верна.")

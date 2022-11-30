@@ -1,7 +1,13 @@
 from datetime import date
 
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
+
+
+def validate_email(value):
+    if "rambler.ru" in value:
+        raise ValidationError(f"Pегистрация с {value} запрещена.")
 
 
 class Location(models.Model):
@@ -31,7 +37,7 @@ class User(AbstractUser):
     age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
     birth_date = models.DateField(default=date.today())
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, validators=[validate_email])
 
     class Meta:
         verbose_name = "Пользователь"

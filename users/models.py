@@ -7,7 +7,7 @@ from django.db import models
 
 def validate_email(value):
     if "rambler.ru" in value:
-        raise ValidationError(f"Pегистрация с {value} запрещена.")
+        raise ValidationError(f"Pегистрация с домена {value} запрещена.")
 
 
 class Location(models.Model):

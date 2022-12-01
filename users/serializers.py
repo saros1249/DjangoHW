@@ -7,12 +7,11 @@ from rest_framework.validators import UniqueValidator
 from users.models import User, Location
 
 
+class AgeNewUserValidator:
 
-
-# class AgeNewUserValidator:
-#     def __call__(self, value):
-#         if (date.today().year - value.year) < 9:
-#             raise ValidationError("Возраст меньше 9 лет.")
+    def __call__(self, value):
+        if (date.today().year - value.year) < 9:
+            raise ValidationError("Возраст меньше 9 лет.")
 
 
 class LocationSerializer(serializers.ModelSerializer):

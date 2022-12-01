@@ -1,13 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MinLengthValidator
 from users.models import User, Location
-from django.core.exceptions import ValidationError
-def min_slug_lenght(value: str):
-    if len(value) < 5:
-        raise ValidationError(f"{value} не верна.")
 
 
 class Categories(models.Model):
+    slug = models.CharField(unique=True, max_length=10, validators=[MinLengthValidator(5)])
     name = models.CharField(verbose_name="Название категории объявления", max_length=30, unique=True)
 
     class Meta:
@@ -19,7 +16,6 @@ class Categories(models.Model):
 
 
 class Ads(models.Model):
-    slug = models.CharField(unique=True, max_length=10, validators=[min_slug_lenght])
     name = models.CharField(max_length=100, validators=[MinLengthValidator(10)])
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='ad')
     price = models.PositiveIntegerField(validators=[MinValueValidator(0)])

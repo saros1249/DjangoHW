@@ -5,8 +5,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
-def validate_email(value):
-    if "rambler.ru" in value:
+def validate_email(value: str):
+    if "ru" in value:
         raise ValidationError(f"Pегистрация с домена {value} запрещена.")
 
 

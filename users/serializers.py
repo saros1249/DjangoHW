@@ -7,11 +7,9 @@ from rest_framework.validators import UniqueValidator
 from users.models import User, Location
 
 
-class AgeNewUserValidator:
-
-    def __call__(self, value):
-        if (date.today().year - value.year) < 9:
-            raise ValidationError("Возраст меньше 9 лет.")
+def age_new_user_validator(value):
+    if date.today().year - value.year < 9:
+        raise ValidationError("Возраст меньше 9 лет.")
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -53,7 +51,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
 
-    birth_date = serializers.DateTimeField(validators=[])
+    birth_date = serializers.DateTimeField(validators=[age_new_user_validator])
 
     class Meta:
         model = User

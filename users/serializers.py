@@ -12,6 +12,11 @@ def age_new_user_validator(value):
         raise ValidationError("Возраст меньше 9 лет.")
 
 
+def validate_email(value):
+    if "rambler.ru" in value:
+        raise ValidationError("Pегистрация с домена rambler.ru запрещена.")
+
+
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
@@ -49,7 +54,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         slug_field="name"
     )
 
-    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all()), validate_email])
 
     birth_date = serializers.DateTimeField(validators=[age_new_user_validator])
 

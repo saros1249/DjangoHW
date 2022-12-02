@@ -1,0 +1,22 @@
+import pytest
+
+
+@pytest.fixture
+@pytest.mark.django_db
+def hr_token(client, django_user_model):
+    password = "123qwe"
+    username = "TestUsername"
+    birth_date = "2000-12-02"
+    email = "sd@mail.ru"
+
+    django_user_model.objects.create_user(
+        username=username, password=password, birth_data=birth_date, email=email
+    )
+
+    response = client.post(
+        "/user/login/",
+        {"username": username, "password": password},
+        format="json"
+    )
+
+    return response.data["token"]

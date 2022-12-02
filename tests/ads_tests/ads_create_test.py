@@ -6,16 +6,15 @@ def test_create_ads(client, hr_token):
     expected_response = {
         "id": 1,
         "name": "TestText",
-        "author": "TestUsername",
+        "author": None,
         "price": 1000,
         "description": None,
         "is_published": False,
-        "category": None,
+        "category": None
     }
 
     data = {
         "name": "TestText",
-        "author": "TestUsername",
         "price": 1000
     }
 

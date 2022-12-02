@@ -6,11 +6,12 @@ import pytest
 def hr_token(client, django_user_model):
     password = "123qwe"
     username = "TestUsername"
-    birth_date = "2000-12-02"
+    birth_date = "2000-12-08"
     email = "sd@mail.ru"
+    location = "London"
 
     django_user_model.objects.create_user(
-        username=username, password=password, birth_data=birth_date, email=email
+        username=username, password=password, birth_date=birth_date, email=email
     )
 
     response = client.post(

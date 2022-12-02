@@ -5,7 +5,7 @@ from tests.factories import AdsFactory
 
 
 @pytest.mark.django_db
-def test_vacancy_list(client):
+def test_list_ads(client):
     ads = AdsFactory.create_batch(10)
     expected_response = {
         "count": 10,

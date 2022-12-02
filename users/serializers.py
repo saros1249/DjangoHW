@@ -1,5 +1,6 @@
 from datetime import date
 
+from dateutil.relativedelta import relativedelta
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
@@ -8,7 +9,7 @@ from users.models import User, Location
 
 
 def age_new_user_validator(value):
-    if date.today().year - value.year < 9:
+    if relativedelta(date.today(), value).years() < 9:
         raise ValidationError("Возраст меньше 9 лет.")
 
 

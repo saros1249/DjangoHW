@@ -1,5 +1,6 @@
 import factory.django
 from ads.models import Ads, Selection
+from users.models import User
 
 
 class AdsFactory(factory.django.DjangoModelFactory):
@@ -7,7 +8,6 @@ class AdsFactory(factory.django.DjangoModelFactory):
         model = Ads
 
     name = "TestText"
-    author = "TestUsername"
     price = 1000
 
 

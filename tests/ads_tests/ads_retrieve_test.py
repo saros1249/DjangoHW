@@ -4,12 +4,13 @@ import pytest
 @pytest.mark.django_db
 def test_retrieve_ads(client, ads, hr_token):
     expected_response = {
-        "id": 1,
+        "id": ads.pk,
         "name": "TestText",
-        "author": "TestUsername",
+        "author": None,
         "price": 1000,
         "description": None,
         "is_published": False,
+        "image": None,
         "category": None,
     }
 

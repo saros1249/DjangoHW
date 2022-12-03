@@ -5,8 +5,8 @@ import pytest
 def test_create_ads(client, hr_token):
     expected_response = {
         "id": 1,
-        "name": "TestText",
-        "author": None,
+        "name": "TestTextQwerty",
+        "author": ["TestUsername"],
         "price": 1000,
         "description": None,
         "is_published": False,
@@ -14,13 +14,14 @@ def test_create_ads(client, hr_token):
     }
 
     data = {
-        "name": "TestText",
-        "price": 1000
+        "name": "TestTextQwerty",
+        "price": 1000,
+        "author": "TestUsername"
     }
 
     response = client.post(
         "/ad/create/",
-        data, _mutable=True,
+        data,
         format="json",
         HTTP_AUTHORIZATION="Token " + hr_token
     )

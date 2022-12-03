@@ -60,6 +60,7 @@ class AdsCreateSerializer(serializers.ModelSerializer):
         exclude = ["image"]
 
     def is_valid(self, raise_exception=False):
+        self.initial_data._mutable = True
         self._author = self.initial_data.pop("author")
         return super().is_valid(raise_exception=raise_exception)
 

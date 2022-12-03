@@ -20,7 +20,7 @@ def test_create_ads(client, hr_token):
 
     response = client.post(
         "/ad/create/",
-        data,
+        data, _mutable=True,
         format="json",
         HTTP_AUTHORIZATION="Token " + hr_token
     )

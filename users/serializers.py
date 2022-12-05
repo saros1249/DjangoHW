@@ -1,21 +1,11 @@
-from datetime import date
-
-from dateutil.relativedelta import relativedelta
 from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
-
 from users.models import User, Location
 
 
-def age_new_user_validator(value):
-    if relativedelta(date.today(), value).years() < 9:
-        raise ValidationError("Возраст меньше 9 лет.")
-
-
-def validate_email(value):
-    if "rambler.ru" in value:
-        raise ValidationError("Pегистрация с домена rambler.ru запрещена.")
+def email_validator(value):
+    if value.endswith("rambler.ru"):
+        raise serializers.ValidationError("Pегистрация с домена rambler.ru запрещена.")
 
 
 class LocationSerializer(serializers.ModelSerializer):
@@ -55,9 +45,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         slug_field="name"
     )
 
-    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all()), validate_email])
-
-    birth_date = serializers.DateTimeField(validators=[age_new_user_validator])
+    email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all()), email_validator])
 
     class Meta:
         model = User

@@ -1,8 +1,17 @@
 from datetime import date
-
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import AbstractUser
-
 from django.db import models
+from rest_framework.exceptions import ValidationError
+
+from HW27.settings import USER_MIN_AGE
+
+
+def age_new_user_validator(value):
+    diff_date = relativedelta(date.today(), value).years
+    if diff_date < USER_MIN_AGE:
+        raise ValidationError("Возраст меньше 9 лет.")
+    return value
 
 
 class Location(models.Model):
@@ -31,7 +40,7 @@ class User(AbstractUser):
     role = models.CharField(choices=UserRole.choices, default='member', max_length=20)
     age = models.PositiveIntegerField(null=True)
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    birth_date = models.DateField(default=date.today())
+    birth_date = models.DateField(validators=[age_new_user_validator])
     email = models.EmailField(unique=True)
 
     class Meta:

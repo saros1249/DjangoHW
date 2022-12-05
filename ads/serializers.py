@@ -2,7 +2,10 @@ from ads.models import Categories, Ads, Selection
 from rest_framework import serializers
 from users.models import User
 
-
+def is_pulished_validator(value):
+    if value:
+        raise serializers.ValidationError("is_published не может быть True")
+    return value
 class CatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories
@@ -44,6 +47,7 @@ class AdsRetrieveSerializer(serializers.ModelSerializer):
 
 
 class AdsCreateSerializer(serializers.ModelSerializer):
+    is_pulished = serializers.BooleanField(validators=[is_pulished_validator])
     author = serializers.SlugRelatedField(
         required=False,
         queryset=User.objects.all(),
